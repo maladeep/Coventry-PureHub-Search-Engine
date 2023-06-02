@@ -1,4 +1,4 @@
-import os  # Module for interacting with the operating system
+#import os  # Module for interacting with the operating system
 import time  # Module for time-related operations
 import ujson  # Module for working with JSON data
 from random import randint  # Module for generating random numbers
