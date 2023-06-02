@@ -1,7 +1,6 @@
 
 import nltk #NLTK for natural language processing tasks
-# from nltk.corpus import stopwords # list of stop word 
-from nltk_stopwords import stopwords
+from nltk.corpus import stopwords # list of stop word 
 from nltk.tokenize import word_tokenize # To tokenize each word
 from nltk.stem import PorterStemmer # For specific rules to transform words to their stems
 
@@ -36,7 +35,7 @@ with open('pub_name.json','r') as f:publication=f.read()
 pubName = ujson.loads(publication)
 
 #Downloading libraries to use its methods
-nltk.download('stopword')
+nltk.download('stopwords')
 nltk.download('punkt')
 
 #Predefined stopwords in nltk are used
