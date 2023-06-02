@@ -9,7 +9,7 @@ from nltk.stem import PorterStemmer
 
 # Set up the NLTK components
 stemmer = PorterStemmer()
-stop_words = nltk.corpus.stopwords.words('english')
+stop_words = set(stopwords.words('english'))
 tfidf = TfidfVectorizer()
 
 # Load the data
