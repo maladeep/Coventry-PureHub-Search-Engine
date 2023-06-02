@@ -1,0 +1,14 @@
+streamlit
+Pillow
+ujson
+scikit-learn
+nltk
+numpy
+pandas
+seaborn
+matplotlib
+scikit-multilearn
+requests
+beautifulsoup4
+selenium
+webdriver_manager
