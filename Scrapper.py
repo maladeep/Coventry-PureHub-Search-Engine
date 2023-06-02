@@ -13,11 +13,11 @@ from webdriver_manager.chrome import ChromeDriverManager  # Driver manager for C
 
 
 # Delete files if present
-try:
-    os.remove('Authors_URL.txt')
-    os.remove('scraper_results.json')
-except OSError:
-    pass
+# try:
+#     os.remove('Authors_URL.txt')
+#     os.remove('scraper_results.json')
+# except OSError:
+#     pass
 
 def write_authors(list1, file_name):
      # Function to write authors' URLs to a file
