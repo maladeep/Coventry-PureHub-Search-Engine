@@ -1,6 +1,7 @@
 
 import nltk #NLTK for natural language processing tasks
-from nltk.corpus import stopwords # list of stop word 
+# from nltk.corpus import stopwords # list of stop word 
+from nltk_stopwords import stopwords
 from nltk.tokenize import word_tokenize # To tokenize each word
 from nltk.stem import PorterStemmer # For specific rules to transform words to their stems
 
