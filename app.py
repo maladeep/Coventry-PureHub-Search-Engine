@@ -7,9 +7,13 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 
+import nltk
+nltk.download('stopwords')
+
+
 # Set up the NLTK components
 stemmer = PorterStemmer()
-stop_words = set(stopwords.words('english'))
+stop_words = stopwords.words('english')
 tfidf = TfidfVectorizer()
 
 # Load the data
