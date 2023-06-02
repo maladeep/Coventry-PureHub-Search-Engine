@@ -28,15 +28,15 @@ with open('pub_cu_author.json', 'w') as f:ujson.dump(pubCUAuthor, f)
 with open('pub_date.json', 'w') as f: ujson.dump(pubDate, f)
 
 
-#Downloading libraries to use its methods
-nltk.download('stopword')
-nltk.download('punkt')
-
 #Open a file with publication names in read mode
 with open('pub_name.json','r') as f:publication=f.read()
 
 #Load JSON File
 pubName = ujson.loads(publication)
+
+#Downloading libraries to use its methods
+nltk.download('stopword')
+nltk.download('punkt')
 
 #Predefined stopwords in nltk are used
 stop_words = stopwords.words('english')
