@@ -1,4 +1,3 @@
-
 ![Project Screenshot](cire.png)
 
 Uncover the brilliance: Explore profiles, groundbreaking work, and cutting-edge research by the exceptional minds of Coventry University.
@@ -25,7 +24,7 @@ The Coventry PureHub Search Engine is a web application that allows users to sea
 
 
 
-![Light mode](CPHub.png)
+![Light mode](CPhub.png)
 
 
 ## Installation
@@ -49,6 +48,25 @@ The Coventry PureHub Search Engine is a web application that allows users to sea
 3. Enter your search query, select the search filter and search type, and click the "SEARCH" button.
 4. View the search results displayed in cards.
 5. Scroll down to view more search results.
+
+## Dependencies
+
+The project has the following vital dependencies:
+
+- streamlit
+- Pillow
+- ujson
+- scikit-learn
+- nltk
+- numpy
+- pandas
+- seaborn
+- matplotlib
+- scikit-multilearn
+- requests
+- beautifulsoup4
+- selenium
+- webdriver_manager
 
 ## Contributing
 
