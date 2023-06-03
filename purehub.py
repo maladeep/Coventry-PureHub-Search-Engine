@@ -184,15 +184,15 @@ def app():
 
     st.markdown("<p style='text-align: center;'> Brought to you with ❤ by <a href='https://github.com/maladeep'>Mala Deep</a> | Data © Coventry University </p>", unsafe_allow_html=True)
 
-
 def show_results(output_data, search_type):
     if output_data:
         if search_type == "Publications":
             for k, v in output_data.items():
                 st.subheader(pub_name[k])
-                author_id = pub_cu_author.get(k)
-                if author_id:
-                    st.write("Authors:", author_name.get(author_id))
+                author_ids = pub_cu_author.get(k, [])
+                if author_ids:
+                    authors = [author_name.get(author_id) for author_id in author_ids]
+                    st.write("Authors:", ', '.join(authors))
                 st.write("Published on:", pub_date.get(k))
                 st.write("Similarity Score:", v)
                 st.write("Read more:", pub_url.get(k))
