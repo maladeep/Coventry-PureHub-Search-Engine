@@ -7,6 +7,11 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 
+# Import Stopwords and punkt
+import nltk
+nltk.download('stopwords')
+nltk.download('punkt')
+
 # Set up the NLTK components
 stemmer = PorterStemmer()
 stop_words = stopwords.words('english')
@@ -33,64 +38,67 @@ with open('pub_date.json', 'r') as f:
     pub_date = ujson.load(f)
 
 
-def search_data(input_text, operator_val, search_type):
+# Streamlit Decorator to cache the function's output, this will improve performance when the function is called multiple times
+@st.cache
+
+#Inverted indexer 
+def build_inverted_index(documents):
+    inverted_index = {}
+
+    for doc_id, doc in enumerate(documents):
+        words = word_tokenize(doc)
+
+        for word in words:
+            if word.lower() not in stop_words:
+                stemmed_word = stemmer.stem(word)
+                if stemmed_word in inverted_index:
+                    inverted_index[stemmed_word].append(doc_id)
+                else:
+                    inverted_index[stemmed_word] = [doc_id]
+
+    return inverted_index
+
+# Searching data based on user input
+def search_data(input_text, operator_val, search_type, inverted_index):
     output_data = {}
-    if operator_val == 2:
+
+    if operator_val == 1:  # Exact operator (AND)
         input_text = input_text.lower().split()
-        pointer = []
+        pointer = set()
+
         for token in input_text:
-            if len(input_text) < 2:
-                st.warning("Please enter at least 2 words to apply the operator.")
+            if len(token) <= 3:
+                st.warning("Please enter more than 3 characters.")
                 break
-            # if len(token) <= 3:
-            #     st.warning("Please enter more than 4 characters.")
-            #     break
-            stem_temp = ""
-            stem_word_file = []
-            temp_file = []
-            word_list = word_tokenize(token)
 
-            for x in word_list:
-                if x not in stop_words:
-                    stem_temp += stemmer.stem(x) + " "
-            stem_word_file.append(stem_temp)
+            stemmed_word = stemmer.stem(token)
+            if stemmed_word in inverted_index:
+                pointer.update(inverted_index[stemmed_word])
 
-            if search_type == "publication" and pub_index.get(stem_word_file[0].strip()):
-                pointer = pub_index.get(stem_word_file[0].strip())
-            elif search_type == "author" and author_index.get(stem_word_file[0].strip()):
-                pointer = author_index.get(stem_word_file[0].strip())
+        if len(pointer) == 0:
+            output_data = {}
+        else:
+            temp_file = [pub_list_first_stem[i] for i in pointer]
+            temp_file = tfidf.fit_transform(temp_file)
+            cosine_output = cosine_similarity(temp_file, tfidf.transform(input_text))
 
-            if len(pointer) == 0:
-                output_data = {}
-            else:
-                for j in pointer:
-                    if search_type == "publication":
-                        temp_file.append(pub_list_first_stem[j])
-                    elif search_type == "author":
-                        temp_file.append(author_list_first_stem[j])
-
-                temp_file = tfidf.fit_transform(temp_file)
-                cosine_output = cosine_similarity(temp_file, tfidf.transform(stem_word_file))
-
-                for j in pointer:
-                    output_data[j] = cosine_output[pointer.index(j)]
+            for i, j in zip(pointer, cosine_output):
+                output_data[i] = j
 
     else:  # Relevant operator (OR)
         input_text = input_text.lower().split()
         pointer = []
         match_word = []
+
         for token in input_text:
-            if len(input_text) < 2:
-                st.warning("Please enter at least 2 words to apply the operator.")
+            if len(token) <= 3:
+                st.warning("Please enter more than 3 characters.")
                 break
-            # if len(token) <= 3:
-            #     st.warning("Please enter more than 4 characters.")
-            #     break
-            temp_file = []
-            set2 = set()
+
             stem_word_file = []
-            word_list = word_tokenize(token)
             stem_temp = ""
+            word_list = word_tokenize(token)
+
             for x in word_list:
                 if x not in stop_words:
                     stem_temp += stemmer.stem(x) + " "
@@ -98,87 +106,17 @@ def search_data(input_text, operator_val, search_type):
 
             if search_type == "publication" and pub_index.get(stem_word_file[0].strip()):
                 set1 = set(pub_index.get(stem_word_file[0].strip()))
-                pointer.extend(list(set1))
-            elif search_type == "author" and author_index.get(stem_word_file[0].strip()):
-                set1 = set(author_index.get(stem_word_file[0].strip()))
-                pointer.extend(list(set1))
+                pointer = pointer + list(set1)
 
-            if match_word == []:
-                match_word = list({z for z in pointer if z in set2 or (set2.add(z) or False)})
+        for i in pointer:
+            if search_type == "publication":
+                match_word.append(pub_list_first_stem[i])
             else:
-                match_word.extend(list(set1))
-                match_word = list({z for z in match_word if z in set2 or (set2.add(z) or False)})
+                match_word.append(author_list_first_stem[i])
 
-        if len(input_text) > 1:
-            match_word = {z for z in match_word if z in set2 or (set2.add(z) or False)}
-
-            if len(match_word) == 0:
-                output_data = {}
-            else:
-                for j in list(match_word):
-                    if search_type == "publication":
-                        temp_file.append(pub_list_first_stem[j])
-                    elif search_type == "author":
-                        temp_file.append(author_list_first_stem[j])
-
-                temp_file = tfidf.fit_transform(temp_file)
-                cosine_output = cosine_similarity(temp_file, tfidf.transform(stem_word_file))
-
-                for j in list(match_word):
-                    output_data[j] = cosine_output[list(match_word).index(j)]
-        else:
-            if len(pointer) == 0:
-                output_data = {}
-            else:
-                for j in pointer:
-                    if search_type == "publication":
-                        temp_file.append(pub_list_first_stem[j])
-                    elif search_type == "author":
-                        temp_file.append(author_list_first_stem[j])
-
-                temp_file = tfidf.fit_transform(temp_file)
-                cosine_output = cosine_similarity(temp_file, tfidf.transform(stem_word_file))
-
-                for j in pointer:
-                    output_data[j] = cosine_output[pointer.index(j)]
+        output_data = match_word
 
     return output_data
-
-
-def app():
-
-        # Load the image and display it
-    image = Image.open('cire.png')
-    st.image(image)
-
-    input_text = st.text_input("Search research:", key="query_input")
-    operator_val = st.radio(
-        "Search Filters",
-        ['Exact', 'Relevant'],
-        index=1,
-        key="operator_input",
-        horizontal=True,
-    )
-    search_type = st.radio(
-        "Search in:",
-        ['Publications', 'Authors'],
-        index=0,
-        key="search_type_input",
-        horizontal=True,
-    )
-
-    if st.button("SEARCH"):
-        if search_type == "Publications":
-            output_data = search_data(input_text, 1 if operator_val == 'Exact' else 2, "publication")
-        elif search_type == "Authors":
-            output_data = search_data(input_text, 1 if operator_val == 'Exact' else 2, "author")
-        else:
-            output_data = {}
-
-        # Display the search results
-        show_results(output_data, search_type)
-
-    st.markdown("<p style='text-align: center;'> Brought To you with ❤ By <a href='https://github.com/maladeep'>Mala Deep</a> | Data © Coventry University </p>", unsafe_allow_html=True)
 
 
 def show_results(output_data, search_type):
@@ -217,6 +155,43 @@ def show_results(output_data, search_type):
         st.info(f"Results shown for: {aa}")
 
 
+def app():
+    # Load the image and display it
+    image = Image.open('cire.png')
+    st.image(image)
+
+    input_text = st.text_input("Search research:", key="query_input")
+    operator_val = st.radio(
+        "Search Filters",
+        ['Exact', 'Relevant'],
+        index=1,
+        key="operator_input",
+        horizontal=True,
+    )
+    search_type = st.radio(
+        "Search in:",
+        ['Publications', 'Authors'],
+        index=0,
+        key="search_type_input",
+        horizontal=True,
+    )
+
+    if st.button("SEARCH"):
+        if search_type == "Publications":
+            output_data = search_data(input_text, 1 if operator_val == 'Exact' else 2, "publication", inverted_index)
+        elif search_type == "Authors":
+            output_data = search_data(input_text, 1 if operator_val == 'Exact' else 2, "author", inverted_index)
+        else:
+            output_data = {}
+
+        # Display the search results
+        show_results(output_data, search_type)
+
+    st.markdown("<p style='text-align: center;'> Brought To you with ❤ By <a href='https://github.com/maladeep'>Mala Deep</a> | Data © Coventry University </p>", unsafe_allow_html=True)
+
+
+# Build the inverted index
+inverted_index = build_inverted_index(pub_list_first_stem)
+
 if __name__ == '__main__':
     app()
-
