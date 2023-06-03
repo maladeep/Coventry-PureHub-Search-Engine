@@ -11,16 +11,20 @@ Uncover the brilliance: Explore profiles, groundbreaking work, and cutting-edge 
 - [Dependencies](#dependencies)
 - [Contributing](#contributing)
 - [License](#license)
+- [Why this work](note)
 
 ## Overview
-The Coventry PureHuB Search Engine is a web application that allows users to search for research publications and authors affiliated with Coventry University. The application utilizes natural language processing techniques, such as stemming and TF-IDF, to provide accurate search results.
+The Coventry PureHuB Search Engine is a web application that allows users to search for research publications and authors affiliated with Coventry University. The application utilizes natural language processing techniques, such as stemming and TF-IDF and other technique like inverse indexer to provide accurate search results in a user friendly manner.
+
 
 ## Features
-- Search for research publications as well as with authors name
-- Two search filter options: Exact and Relevant
-- Search within publications or authors
-- Display search results with publication, author, date of publication, paper URL, and ranking
-- User-friendly interface with image and text description
+
+- Research Publication Search: Users can search for research publications by entering relevant keywords or phrases. The search engine employs advanced techniques such as stemming and TF-IDF to match the user's query with the indexed publication data accurately.
+- 
+- Author Search: Users can also search for specific authors by their names or related keywords. The search engine applies the same advanced techniques to match the user's input with the indexed author data.
+Stemming and TF-IDF: The search engine utilizes stemming to reduce words to their base or root form, enabling broader search coverage. Additionally, the application employs TF-IDF to calculate the importance of each term in the documents and generate relevance scores for accurate ranking of search results.
+
+- Inverse Indexer: The search engine includes an inverse indexer that indexes and stores the publication and author data in a structured manner, enabling efficient retrieval and retrieval of relevant information.
 
 
 
@@ -53,20 +57,22 @@ The Coventry PureHuB Search Engine is a web application that allows users to sea
 
 The project has the following vital dependencies:
 
-- streamlit
-- Pillow
-- ujson
-- scikit-learn
-- nltk
-- numpy
-- pandas
-- seaborn
-- matplotlib
-- scikit-multilearn
-- requests
-- beautifulsoup4
-- selenium
-- webdriver_manager
+The Coventry PureHub Search Engine relies on the following dependencies:
+
+- streamlit: The web application framework used for building the user interface.
+- Pillow: A library for opening and manipulating images, used to display an image in the streamlit application.
+- ujson: A fast JSON encoder and decoder library, used to load JSON data.
+- scikit-learn: A machine learning library, used for text preprocessing, TF-IDF vectorization, and cosine similarity calculation.
+- nltk: The Natural Language Toolkit, used for tokenization, stemming, and stop-word removal.
+- numpy: A powerful library for numerical computations in Python.
+- pandas: A data manipulation library, used for handling and processing structured data.
+- seaborn: A data visualization library, used for creating attractive and informative plots.
+- matplotlib: A versatile plotting library, used for generating various types of charts and graphs.
+- scikit-multilearn: A library for multi-label classification, used for advanced search features.
+- requests: A library for making HTTP requests, used for fetching external resources.
+- beautifulsoup4: A library for web scraping, used for extracting data from web pages.
+- selenium: A library for web automation, used for interacting with web pages.
+- webdriver_manager: A library for managing web drivers, used for browser automation.
 
 ## Contributing
 
@@ -76,3 +82,5 @@ Contributions to this project are welcome. If you find any issues or would like 
 
 This project is licensed under the MIT License. See the LICENSE file for more information.
 
+## Note
+The work is done for the partial fulfillment of STW7071CEM Information Retrieval coursework provided by Coventry University. 
