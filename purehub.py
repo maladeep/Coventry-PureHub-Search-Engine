@@ -191,9 +191,9 @@ def show_results(output_data, search_type):
                 pub_cu_author = ujson.load(f)
             for k, v in output_data.items():
                 st.subheader(pub_name[k])
-                author_ids = pub_cu_author.get(k, [])
+                author_ids = pub_cu_author[k] if k < len(pub_cu_author) else []
                 if author_ids:
-                    authors = [author_name.get(author_id) for author_id in author_ids]
+                    authors = [author_name[author_id] for author_id in author_ids]
                     st.write("Authors:", ', '.join(authors))
                 st.write("Published on:", pub_date.get(k))
                 st.write("Similarity Score:", v)
