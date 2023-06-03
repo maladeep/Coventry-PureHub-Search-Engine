@@ -175,17 +175,19 @@ def app():
     if st.button("SEARCH"):
         if search_type == "Publications":
             output_data = search_data(input_text, 1 if operator_val == 'Exact' else 2, "publication")
-            show_results(output_data, search_type, pub_cu_author)
+            show_results(output_data, search_type, author_name, pub_cu_author)
         elif search_type == "Authors":
             output_data = search_data(input_text, 1 if operator_val == 'Exact' else 2, "author")
-            show_results(output_data, search_type)
+            show_results(output_data, search_type, author_name)
         else:
             output_data = {}
-            show_results(output_data, search_type)
+            show_results(output_data, search_type, author_name)
+
 
     st.markdown("<p style='text-align: center;'> Brought to you with ❤ by <a href='https://github.com/maladeep'>Mala Deep</a> | Data © Coventry University </p>", unsafe_allow_html=True)
 
-def show_results(output_data, search_type, pub_cu_author=None):
+def show_results(output_data, search_type, author_name=None, pub_cu_author=None):
+    
     if output_data:
         if search_type == "Publications":
             for k, v in output_data.items():
