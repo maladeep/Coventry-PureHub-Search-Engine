@@ -192,8 +192,8 @@ def show_results(output_data, search_type):
             for k, v in output_data.items():
                 st.subheader(pub_name[k])
                 author_ids = pub_cu_author[k] if k < len(pub_cu_author) else []
-                if author_ids:
-                    authors = [author_name[author_id] for author_id in author_ids]
+                authors = [author_name[author_id] for author_id in author_ids if author_id < len(author_name)]
+                if authors:
                     st.write("Authors:", ', '.join(authors))
                 st.write("Published on:", pub_date.get(k))
                 st.write("Similarity Score:", v)
@@ -201,9 +201,10 @@ def show_results(output_data, search_type):
                 st.write("---")
         elif search_type == "Authors":
             for k, v in output_data.items():
-                st.subheader(author_name[k])
-                st.write("Similarity Score:", v)
-                st.write("---")
+                if k < len(author_name):
+                    st.subheader(author_name[k])
+                    st.write("Similarity Score:", v)
+                    st.write("---")
     else:
         st.warning("No results found for the given query.")
 
