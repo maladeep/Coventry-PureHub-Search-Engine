@@ -187,6 +187,8 @@ def app():
 def show_results(output_data, search_type):
     if output_data:
         if search_type == "Publications":
+            with open('pub_cu_author.json', 'r') as f:
+                pub_cu_author = ujson.load(f)
             for k, v in output_data.items():
                 st.subheader(pub_name[k])
                 author_ids = pub_cu_author.get(k, [])
@@ -204,6 +206,7 @@ def show_results(output_data, search_type):
                 st.write("---")
     else:
         st.warning("No results found for the given query.")
+
 
 
 
