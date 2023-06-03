@@ -20,11 +20,13 @@ The Coventry PureHuB Search Engine is a web application that allows users to sea
 ## Features
 
 - Research Publication Search: Users can search for research publications by entering relevant keywords or phrases. The search engine employs advanced techniques such as stemming and TF-IDF to match the user's query with the indexed publication data accurately.
-- 
+
 - Author Search: Users can also search for specific authors by their names or related keywords. The search engine applies the same advanced techniques to match the user's input with the indexed author data.
 Stemming and TF-IDF: The search engine utilizes stemming to reduce words to their base or root form, enabling broader search coverage. Additionally, the application employs TF-IDF to calculate the importance of each term in the documents and generate relevance scores for accurate ranking of search results.
 
 - Inverse Indexer: The search engine includes an inverse indexer that indexes and stores the publication and author data in a structured manner, enabling efficient retrieval and retrieval of relevant information.
+
+- Multinomial Naïve Bayes Classification: The search engine incorporates the Multinomial Naïve Bayes classification technique to categorize publications into different subject categories.
 
 
 
