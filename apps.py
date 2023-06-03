@@ -117,7 +117,6 @@ def search_data(input_text, operator_val, search_type, inverted_index):
 
     return output_data
 
-
 def show_results(output_data, search_type):
     try:
         st.write(f"Output Data: {output_data}")
@@ -132,7 +131,8 @@ def show_results(output_data, search_type):
         st.write(f"Rank Sorting Type: {type(rank_sorting)}")
 
         # Show the total number of research results
-        st.info(f"Showing results for: {len(rank_sorting)}")
+        if rank_sorting is not None:
+            st.info(f"Showing results for: {len(rank_sorting)}")
 
         # Show the cards
         N_cards_per_row = 3
@@ -155,13 +155,14 @@ def show_results(output_data, search_type):
                     st.markdown(f"**{pub_url[id_val]}**")
                     st.markdown(f"Ranking: {ranking[0]:.2f}")
 
-        if len(rank_sorting) == 0:
+        if rank_sorting is None or len(rank_sorting) == 0:
             st.info("No results found. Please try again.")
         else:
             st.info(f"Results shown for: {len(rank_sorting)}")
 
     except Exception as e:
         st.error(f"An error occurred: {str(e)}")
+
 
 
 def app():
