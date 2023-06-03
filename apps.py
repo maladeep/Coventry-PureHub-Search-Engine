@@ -7,6 +7,12 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 
+
+import nltk
+nltk.download('stopwords')
+nltk.download('punkt')
+
+
 # Set up the NLTK components
 stemmer = PorterStemmer()
 stop_words = stopwords.words('english')
