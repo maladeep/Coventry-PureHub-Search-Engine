@@ -130,6 +130,9 @@ def show_results(output_data, search_type):
         rank_sorting = sorted(output_data.items(), key=lambda z: z[1], reverse=True)
         print(f"Rank Sorting: {rank_sorting}")
 
+    print(f"Rank Sorting Type: {type(rank_sorting)}")
+
+
     
     # Show the total number of research results
     st.info(f"Showing results for: {len(rank_sorting)}")
