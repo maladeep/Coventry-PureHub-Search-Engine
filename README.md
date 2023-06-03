@@ -13,7 +13,7 @@ Uncover the brilliance: Explore profiles, groundbreaking work, and cutting-edge 
 - [License](#license)
 
 ## Overview
-The Coventry PureHub Search Engine is a web application that allows users to search for research publications and authors affiliated with Coventry University. The application utilizes natural language processing techniques, such as stemming and TF-IDF, to provide accurate search results.
+The Coventry PureHuB Search Engine is a web application that allows users to search for research publications and authors affiliated with Coventry University. The application utilizes natural language processing techniques, such as stemming and TF-IDF, to provide accurate search results.
 
 ## Features
 - Search for research publications as well as with authors name
