@@ -7,6 +7,7 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 import nltk
+import json
 
 nltk.download('stopwords')
 nltk.download('punkt')
@@ -184,15 +185,13 @@ def app():
 
     st.markdown("<p style='text-align: center;'> Brought to you with ❤ by <a href='https://github.com/maladeep'>Mala Deep</a> | Data © Coventry University </p>", unsafe_allow_html=True)
 
-def show_results(output_data, search_type):
+def show_results(output_data, search_type, pub_cu_author):
     if output_data:
         if search_type == "Publications":
-            with open('pub_cu_author.json', 'r') as f:
-                pub_cu_author = ujson.load(f)
             for k, v in output_data.items():
-                st.subheader(pub_names[k])
+                st.subheader(pub_name[k])
                 author_ids = pub_cu_author[k] if k < len(pub_cu_author) else []
-                authors = [author_names[author_id] for author_id in author_ids if author_id < len(author_names)]
+                authors = [author_name[author_id] for author_id in author_ids if author_id < len(author_name)]
                 if authors:
                     st.write("Authors:", ', '.join(authors))
                 st.write("Published on:", pub_date.get(k))
@@ -207,8 +206,6 @@ def show_results(output_data, search_type):
                     st.write("---")
     else:
         st.warning("No results found for the given query.")
-
-
 
 
 if __name__ == '__main__':
