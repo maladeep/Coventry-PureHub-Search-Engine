@@ -119,9 +119,14 @@ def search_data(input_text, operator_val, search_type, inverted_index):
 
 
 def show_results(output_data, search_type):
+    
+   
     aa = 0
+    print(f"Output Data: {output_data}")
+    print(f"Output Data Type: {type(output_data)}")
     rank_sorting = sorted(output_data.items(), key=lambda z: z[1], reverse=True)
 
+    
     # Show the total number of research results
     st.info(f"Showing results for: {len(rank_sorting)}")
 
