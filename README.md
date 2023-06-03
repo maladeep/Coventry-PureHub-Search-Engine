@@ -28,6 +28,8 @@ Stemming and TF-IDF: The search engine utilizes stemming to reduce words to thei
 
 - Multinomial Naïve Bayes Classification: The search engine incorporates the Multinomial Naïve Bayes classification technique to categorize publications into different subject categories.
 
+- Cron-jib
+
 
 
 ![Light mode](CPhub.png)
