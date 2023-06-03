@@ -40,8 +40,6 @@ with open('pub_date.json', 'r') as f:
 
 # Streamlit Decorator to cache the function's output, this will improve performance when the function is called multiple times
 @st.cache
-
-#Inverted indexer 
 def build_inverted_index(documents):
     inverted_index = {}
 
