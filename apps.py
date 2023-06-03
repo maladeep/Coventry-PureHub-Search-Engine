@@ -159,6 +159,10 @@ def app():
     # Load the image and display it
     image = Image.open('cire.png')
     st.image(image)
+    
+    # Add a text description
+    st.markdown("<p style='text-align: center;'> Uncover the brilliance: Explore profiles, groundbreaking work, and cutting-edge research by the exceptional minds of Coventry University.</p>", unsafe_allow_html=True)
+
 
     input_text = st.text_input("Search research:", key="query_input")
     operator_val = st.radio(
