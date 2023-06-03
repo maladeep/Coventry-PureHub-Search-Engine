@@ -119,51 +119,49 @@ def search_data(input_text, operator_val, search_type, inverted_index):
 
 
 def show_results(output_data, search_type):
-    
-    aa = 0
-    print(f"Output Data: {output_data}")
-    print(f"Output Data Type: {type(output_data)}")
-    rank_sorting = None
+    try:
+        st.write(f"Output Data: {output_data}")
+        st.write(f"Output Data Type: {type(output_data)}")
+        rank_sorting = None
 
-    if output_data:
-        print("Output Data is not empty")
-        rank_sorting = sorted(output_data.items(), key=lambda z: z[1], reverse=True)
-        print(f"Rank Sorting: {rank_sorting}")
+        if output_data:
+            st.write("Output Data is not empty")
+            rank_sorting = sorted(output_data.items(), key=lambda z: z[1], reverse=True)
+            st.write(f"Rank Sorting: {rank_sorting}")
 
-    print(f"Rank Sorting Type: {type(rank_sorting)}")
+        st.write(f"Rank Sorting Type: {type(rank_sorting)}")
 
+        # Show the total number of research results
+        st.info(f"Showing results for: {len(rank_sorting)}")
 
-    
-    # Show the total number of research results
-    st.info(f"Showing results for: {len(rank_sorting)}")
+        # Show the cards
+        N_cards_per_row = 3
+        for n_row, (id_val, ranking) in enumerate(rank_sorting):
+            i = n_row % N_cards_per_row
+            if i == 0:
+                st.write("---")
+                cols = st.columns(N_cards_per_row, gap="large")
+            # Draw the card
+            with cols[n_row % N_cards_per_row]:
+                if search_type == "Publications":
+                    st.caption(f"{pub_date[id_val].strip()}")
+                    st.markdown(f"**{pub_cu_author[id_val].strip()}**")
+                    st.markdown(f"*{pub_name[id_val].strip()}*")
+                    st.markdown(f"**{pub_url[id_val]}**")
+                elif search_type == "Authors":
+                    st.caption(f"{pub_date[id_val].strip()}")
+                    st.markdown(f"**{author_name[id_val].strip()}**")
+                    st.markdown(f"*{pub_name[id_val].strip()}*")
+                    st.markdown(f"**{pub_url[id_val]}**")
+                    st.markdown(f"Ranking: {ranking[0]:.2f}")
 
-    # Show the cards
-    N_cards_per_row = 3
-    for n_row, (id_val, ranking) in enumerate(rank_sorting):
-        i = n_row % N_cards_per_row
-        if i == 0:
-            st.write("---")
-            cols = st.columns(N_cards_per_row, gap="large")
-        # Draw the card
-        with cols[n_row % N_cards_per_row]:
-            if search_type == "Publications":
-                st.caption(f"{pub_date[id_val].strip()}")
-                st.markdown(f"**{pub_cu_author[id_val].strip()}**")
-                st.markdown(f"*{pub_name[id_val].strip()}*")
-                st.markdown(f"**{pub_url[id_val]}**")
-            elif search_type == "Authors":
-                st.caption(f"{pub_date[id_val].strip()}")
-                st.markdown(f"**{author_name[id_val].strip()}**")
-                st.markdown(f"*{pub_name[id_val].strip()}*")
-                st.markdown(f"**{pub_url[id_val]}**")
-                st.markdown(f"Ranking: {ranking[0]:.2f}")
+        if len(rank_sorting) == 0:
+            st.info("No results found. Please try again.")
+        else:
+            st.info(f"Results shown for: {len(rank_sorting)}")
 
-        aa += 1
-
-    if aa == 0:
-        st.info("No results found. Please try again.")
-    else:
-        st.info(f"Results shown for: {aa}")
+    except Exception as e:
+        st.error(f"An error occurred: {str(e)}")
 
 
 def app():
