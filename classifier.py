@@ -64,7 +64,7 @@ abstract_list_test = remove_stopwords(data_test)
 abstract_list_wo_sc_train = remove_special_character(abstract_list_train)
 abstract_list_wo_sc_test = remove_special_character(abstract_list_test)
 
-categories=['Computer Science', 'Physics', 'Mathematics', 'Statistics']
+categories=['Engineering', 'Business', 'Art']
 
 x_train = abstract_list_wo_sc_train
 y_train = train_data[categories]
