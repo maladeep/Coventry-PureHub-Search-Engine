@@ -190,9 +190,9 @@ def show_results(output_data, search_type):
             with open('pub_cu_author.json', 'r') as f:
                 pub_cu_author = ujson.load(f)
             for k, v in output_data.items():
-                st.subheader(pub_name[k])
+                st.subheader(pub_names[k])
                 author_ids = pub_cu_author[k] if k < len(pub_cu_author) else []
-                authors = [author_name[author_id] for author_id in author_ids if author_id < len(author_name)]
+                authors = [author_names[author_id] for author_id in author_ids if author_id < len(author_names)]
                 if authors:
                     st.write("Authors:", ', '.join(authors))
                 st.write("Published on:", pub_date.get(k))
