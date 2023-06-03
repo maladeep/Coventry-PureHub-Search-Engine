@@ -11,7 +11,7 @@ Uncover the brilliance: Explore profiles, groundbreaking work, and cutting-edge 
 - [Dependencies](#dependencies)
 - [Contributing](#contributing)
 - [License](#license)
-- [Why this work](note)
+- [Note](note)
 
 ## Overview
 The Coventry PureHuB Search Engine is a web application that allows users to search for research publications and authors affiliated with Coventry University. The application utilizes natural language processing techniques, such as stemming and TF-IDF and other technique like inverse indexer to provide accurate search results in a user friendly manner.
@@ -83,4 +83,4 @@ Contributions to this project are welcome. If you find any issues or would like 
 This project is licensed under the MIT License. See the LICENSE file for more information.
 
 ## Note
-The work is done for the partial fulfillment of STW7071CEM Information Retrieval coursework provided by Coventry University. 
+This work is done for the partial fulfillment of STW7071CEM Information Retrieval coursework provided by Coventry University. 
