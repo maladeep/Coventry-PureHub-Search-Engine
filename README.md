@@ -1,12 +1,10 @@
 
-# Coventry PureHub Search Engine
+![Project Screenshot](cire.png)
 
 Uncover the brilliance: Explore profiles, groundbreaking work, and cutting-edge research by the exceptional minds of Coventry University.
 
-![Project Screenshot](screenshot.png)
 
 ## Table of Contents
-- [Run Live App](https://maladeep-coventry-purehub-search-engine-app-okesr5.streamlit.app/)
 - [Overview](#overview)
 - [Features](#features)
 - [Installation](#installation)
@@ -14,17 +12,21 @@ Uncover the brilliance: Explore profiles, groundbreaking work, and cutting-edge 
 - [Dependencies](#dependencies)
 - [Contributing](#contributing)
 - [License](#license)
-- [Contact](#contact)
 
 ## Overview
 The Coventry PureHub Search Engine is a web application that allows users to search for research publications and authors affiliated with Coventry University. The application utilizes natural language processing techniques, such as stemming and TF-IDF, to provide accurate search results.
 
 ## Features
-- Search for research publications and authors
+- Search for research publications as well as with authors name
 - Two search filter options: Exact and Relevant
 - Search within publications or authors
-- Display search results with publication/author details and ranking
+- Display search results with publication, author, date of publication, paper URL, and ranking
 - User-friendly interface with image and text description
+
+
+
+![Light mode](CPHub.png)
+
 
 ## Installation
 1. Clone the repository:
