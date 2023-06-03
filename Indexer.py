@@ -5,15 +5,22 @@ from nltk.tokenize import word_tokenize # To tokenize each word
 from nltk.stem import PorterStemmer # For specific rules to transform words to their stems
 
 
-#Preprosessing data before indexing
+# Preprosessing data before indexing
 with open('scraper_results.json', 'r') as doc: scraper_results=doc.read()
 
+# Initialize empty lists to store publication name, URL, author, and date
+    
 pubName = []
 pubURL = []
 pubCUAuthor = []
 pubDate = []
+
+# Load the scraped results using ujson
 data_dict = ujson.loads(scraper_results)
+
+# Get the length of the data_dict (number of publications)
 array_length = len(data_dict)
+# Print the number of publications
 print(array_length)
 
 #Seperate name, url, date, author in different file
@@ -80,7 +87,7 @@ for name in pub_list_wo_sc:
             stem_word += stemmer.stem(a) + ' '
     pub_list_stem_wo_sw.append(stem_word.lower())
 
-data_dict = {}
+data_dict = {} #Inverted Index holder
 
 # Indexing process
 for a in range(len(pub_list_stem_wo_sw)):
@@ -90,7 +97,7 @@ for a in range(len(pub_list_stem_wo_sw)):
         else:
             data_dict[b].append(a)
 
-
+# printing the lenght
 print(len(pub_list_wo_sc))
 print(len(pub_list_stem_wo_sw))
 print(len(pub_list_first_stem))
