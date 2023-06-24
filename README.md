@@ -28,7 +28,7 @@ Stemming and TF-IDF: The search engine utilizes stemming to reduce words to thei
 
 - Multinomial Naïve Bayes Classification: The search engine incorporates the Multinomial Naïve Bayes classification technique to categorize publications into different subject categories.
 
-- Cron-jib
+- Cron job: The specific cron schedule used was "0 0 * * 0" along with the command file "Scrapper.py," indicating that the crawler would run every Sunday at midnight. This configuration ensured that the study remained up-to-date with the latest data by consistently retrieving fresh information at the beginning of each week. 
 
 
 
