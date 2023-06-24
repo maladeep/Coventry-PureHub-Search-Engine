@@ -14,7 +14,7 @@ Uncover the brilliance: Explore profiles, groundbreaking work, and cutting-edge 
 - [Note](note)
 
 ## Overview
-The Coventry PureHuB Search Engine is a web application that allows users to search for research publications and authors affiliated with Coventry University. The application utilizes natural language processing techniques, such as stemming and TF-IDF and other technique like inverse indexer to provide accurate search results in a user friendly manner.
+The Coventry PureHuB Search Engine is a web application that allows users to search for research publications and authors affiliated with Coventry University. The application utilizes natural language processing techniques, such as stemming and TF-IDF, and other techniques like inverse indexer to provide accurate search results in a user-friendly manner.
 
 
 ## Features
@@ -22,7 +22,7 @@ The Coventry PureHuB Search Engine is a web application that allows users to sea
 - Research Publication Search: Users can search for research publications by entering relevant keywords or phrases. The search engine employs advanced techniques such as stemming and TF-IDF to match the user's query with the indexed publication data accurately.
 
 - Author Search: Users can also search for specific authors by their names or related keywords. The search engine applies the same advanced techniques to match the user's input with the indexed author data.
-Stemming and TF-IDF: The search engine utilizes stemming to reduce words to their base or root form, enabling broader search coverage. Additionally, the application employs TF-IDF to calculate the importance of each term in the documents and generate relevance scores for accurate ranking of search results.
+Stemming and TF-IDF: The search engine utilizes stemming to reduce words to their base or root form, enabling broader search coverage. Additionally, the application employs TF-IDF to calculate the importance of each term in the documents and generate relevance scores for the accurate ranking of search results.
 
 - Inverse Indexer: The search engine includes an inverse indexer that indexes and stores the publication and author data in a structured manner, enabling efficient retrieval and retrieval of relevant information.
 
@@ -33,6 +33,8 @@ Stemming and TF-IDF: The search engine utilizes stemming to reduce words to thei
 
 
 ![Light mode](CPhub.png)
+
+ [Try PureHuB](https://maladeep-coventry-purehub-search-engine-app-okesr5.streamlit.app/)
 
 
 ## Installation
